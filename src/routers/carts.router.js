@@ -16,19 +16,33 @@ getJSONFromFile(path, (error, data) => {
   }
 });
 
+const sumProducts = (products) => products.reduce((accumulator, product) => {
+  const existingProduct = accumulator.find((p) => p.id === product.id);
+
+  if (existingProduct) {
+    existingProduct.quantity += 1;
+  } else {
+    accumulator.push({ id: product.id, quantity: 1 });
+  }
+
+  return accumulator;
+}, []);
+
 //Creates a new cart
 router.post("/carts", (req, res) => {
   const body = req.body;
 
   console.log("body", body);
 
-  const { products } = body;
+  let { products } = body;
 
   if (!products) {
     return res
       .status(400)
       .json({ message: "Debes agregar un producto al carrito!" });
   }
+
+  products = sumProducts(products)
 
   const newCart = {
     id: uuidv4(),
@@ -37,7 +51,7 @@ router.post("/carts", (req, res) => {
 
   carts.push(newCart);
 
-  saveJSONToFile(path, products);
+  saveJSONToFile(path, carts);
 
   res.status(201).json(newCart);
 });
@@ -45,11 +59,11 @@ router.post("/carts", (req, res) => {
 //Returns an existing cart
 router.get("/carts/:cid", (req, res) => {
   const { cid } = req.params;
-  const cart = carts.find((c) => c.id === cid);
+  let cart = carts.find((c) => c.id === cid);
   if (!cart) {
     return res.status(404).json({ message: "Carrito no encontrado!" });
   }
-  res.status(200).json(cart.products);
+  res.status(200).json(cart);
 });
 
 //Adds one product to an existing cart
@@ -73,7 +87,7 @@ router.post("/carts/:cid/products/:pid", (req, res) => {
     product.quantity += 1;
   }
 
-  saveJSONToFile(path, products);
+  saveJSONToFile(path, carts);
 
   res.status(201).json(cart);
 });

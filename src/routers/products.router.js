@@ -41,18 +41,40 @@ router.post("/products", (req, res) => {
   const { title, description, code, price, status, stock, category, thumbnails } =
     body;
 
-  if (
-    !title ||
-    !description ||
-    !code ||
-    !price ||
-    !status ||
-    !stock ||
-    !category
-  ) {
+  if(!title){
     return res
-      .status(400)
-      .json({ message: "Todos los campos son requeridos!" });
+    .status(400)
+    .json({ message: "El titulo es requerido!" });
+  }
+  if(!description){
+    return res
+    .status(400)
+    .json({ message: "La descripcion es requerida!" });
+  }
+  if(!code){
+    return res
+    .status(400)
+    .json({ message: "El codigo es requerido!" });
+  }
+  if(!price){
+    return res
+    .status(400)
+    .json({ message: "El precio es requerido!" });
+  }
+  if(!status){
+    return res
+    .status(400)
+    .json({ message: "El status es requerido!" });
+  }
+  if(!stock){
+    return res
+    .status(400)
+    .json({ message: "El stock es requerido!" });
+  }
+  if(!category){
+    return res
+    .status(400)
+    .json({ message: "La categoria es requerida!" });
   }
 
   const newProduct = {

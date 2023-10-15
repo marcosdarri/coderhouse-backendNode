@@ -48,12 +48,32 @@ POST A PRODUCT:
  {
     "products": [
         {
-            "id": "1",
-            "quantity": 500
+            "id": "538ca4e1-0548-4841-b293-18ff59e39aa5",
+            "title": "product title",
+            "description": "product description",
+            "code": "1234",
+            "price": 99.99,
+            "status": true,
+            "stock": 456,
+            "category": "dawg",
+            "thumbnails": [
+                "asdasdasdas.jpg",
+                "asdasdasdas2.png"
+            ]
         },
         {
-            "id": "2",
-            "quantity": 300
+            "id": "a8499716-f378-4b9b-89a6-3c8c0f275abe",
+            "title": "product title2",
+            "description": "product description",
+            "code": "1234",
+            "price": 99.99,
+            "status": true,
+            "stock": 456,
+            "category": "dawg",
+            "thumbnails": [
+                "asdasdasdas.jpg",
+                "asdasdasdas2.png"
+            ]
         }
     ]
 }
