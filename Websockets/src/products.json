@@ -1,0 +1,79 @@
+[
+	{
+		"id": "9942bee4-83ff-4dbe-beec-77229f4c7398",
+		"title": "asdasd",
+		"description": "dasda",
+		"code": "12321",
+		"price": "2131",
+		"status": "disponible",
+		"stock": "123",
+		"category": "asda",
+		"thumbnails": []
+	},
+	{
+		"id": "aef7aa5a-1981-41db-a595-9c4d9f334c43",
+		"title": "dasd",
+		"description": "ads",
+		"code": "2121",
+		"price": "121",
+		"status": "disponible",
+		"stock": "1212",
+		"category": "adsad",
+		"thumbnails": []
+	},
+	{
+		"id": "b55a1a48-1a6a-45f6-8be8-0435028aa632",
+		"title": "sdasda",
+		"description": "asdasd",
+		"code": "21312",
+		"price": "121",
+		"status": "disponible",
+		"stock": "2121",
+		"category": "sasa",
+		"thumbnails": []
+	},
+	{
+		"id": "ae5b50e4-ff95-48a6-b201-05e2db3fba96",
+		"title": "adsasd",
+		"description": "dasda",
+		"code": "123123",
+		"price": "231",
+		"status": "disponible",
+		"stock": "1312",
+		"category": "dasda",
+		"thumbnails": []
+	},
+	{
+		"id": "8b127b03-06ff-4992-a5b5-0b96c475d46a",
+		"title": "ejemplo 1",
+		"description": "asdasda",
+		"code": "12312",
+		"price": "12312",
+		"status": "disponible",
+		"stock": "1231",
+		"category": "dasda",
+		"thumbnails": []
+	},
+	{
+		"id": "e1166689-ad77-4df4-bed8-9e3cfec6ed07",
+		"title": "aaaaa",
+		"description": "dasda",
+		"code": "231123",
+		"price": "13213",
+		"status": "disponible",
+		"stock": "123123",
+		"category": "sdasda",
+		"thumbnails": []
+	},
+	{
+		"id": "dc541a2b-a81c-46c7-819b-911129f14e31",
+		"title": "asdas",
+		"description": "12312",
+		"code": "2e131",
+		"price": "121",
+		"status": "disponible",
+		"stock": "121",
+		"category": "sa",
+		"thumbnails": []
+	}
+]
