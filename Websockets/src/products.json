@@ -44,36 +44,14 @@
 		"thumbnails": []
 	},
 	{
-		"id": "8b127b03-06ff-4992-a5b5-0b96c475d46a",
-		"title": "ejemplo 1",
-		"description": "asdasda",
+		"id": "57f7f300-edb0-4215-b973-70e9f7ce99d9",
+		"title": "adsasd",
+		"description": "adsasd",
 		"code": "12312",
-		"price": "12312",
+		"price": "123",
 		"status": "disponible",
-		"stock": "1231",
-		"category": "dasda",
-		"thumbnails": []
-	},
-	{
-		"id": "e1166689-ad77-4df4-bed8-9e3cfec6ed07",
-		"title": "aaaaa",
-		"description": "dasda",
-		"code": "231123",
-		"price": "13213",
-		"status": "disponible",
-		"stock": "123123",
-		"category": "sdasda",
-		"thumbnails": []
-	},
-	{
-		"id": "dc541a2b-a81c-46c7-819b-911129f14e31",
-		"title": "asdas",
-		"description": "12312",
-		"code": "2e131",
-		"price": "121",
-		"status": "disponible",
-		"stock": "121",
-		"category": "sa",
+		"stock": "1322",
+		"category": "asda",
 		"thumbnails": []
 	}
 ]

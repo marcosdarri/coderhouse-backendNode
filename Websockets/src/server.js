@@ -1,7 +1,7 @@
 import http from 'http';
 import { Server } from 'socket.io';
 import products from "./products.json" assert { type: "json" };
-import { addProductFunction } from './utils.js';
+import { addProduct } from './utils.js';
 import { init } from './socket.js';
 
 import app from './app.js';
@@ -15,7 +15,7 @@ socketServer.on('connection', (socket) => {
 });
 
 socketServer.on('addProduct', (newProduct) => {
-  addProductFunction(newProduct)
+  addProduct(newProduct)
   socket.emit("products", JSON.stringify(products));
 });
 

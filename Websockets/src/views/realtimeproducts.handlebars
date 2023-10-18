@@ -33,6 +33,12 @@
     <div class="columna" style="background-color:black;color:white;">
       <h2>Lista de Productos:</h2>
       <ul id="productList"></ul>
+      <h2 style="margin-bottom: 10px">Eliminar Producto:</h2>
+      <p>(Inserte el id del producto que desea eliminar.)</p>
+      <form id="realTimeFormDelete" action="/api/products" method="DELETE">
+        <input type="text" id="id" name="id">
+        <input type="submit" value="Enviar">
+      </form>
     </div>
   </div>
 </div>

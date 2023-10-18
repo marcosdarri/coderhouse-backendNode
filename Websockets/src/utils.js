@@ -49,37 +49,44 @@ const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
 
-const addProductFunction = (productData) => {
+const addProduct = (productData) => {
 
   let products = productsJSON;
 
   const { title, description, code, price, status, stock, category } = productData;
 
-  if(!title){
-     console.log("El titulo es requerido!")
-     return
+  if (!title) {
+    console.log("")
+    console.log("El titulo es requerido!")
+    return
   }
-  if(!description){
+  if (!description) {
+    console.log("")
     console.log("La descripcion es requerida!")
     return
   }
-  if(!code){
+  if (!code) {
+    console.log("")
     console.log("El codigo es requerido!")
     return
   }
-  if(!price){
+  if (!price) {
+    console.log("")
     console.log("El precio es requerido!")
     return
   }
-  if(!status){
+  if (!status) {
+    console.log("")
     console.log("El status es requerido!")
     return
   }
-  if(!stock){
+  if (!stock) {
+    console.log("")
     console.log("El stock es requerido!")
     return
   }
-  if(!category){
+  if (!category) {
+    console.log("")
     console.log("La categoria es requerida!")
     return
   }
@@ -99,6 +106,28 @@ const addProductFunction = (productData) => {
   products.push(newProduct);
 
   saveJSONToFile("./src/products.json", products);
+  console.log("")
+  console.log(`Producto agregado exitosamente! ID: ${newProduct.id}`)
+  console.log("")
 }
 
-export { addProductFunction, __dirname, getJSONFromFile, saveJSONToFile };
+const deleteProduct = (productId) => {
+  if (!productId) {
+    console.log("")
+    console.log("El id no puede ser vacio!")
+    return
+  }
+  let products = productsJSON;
+  const product = products.find((p) => p.id === productId);
+  if (!product) {
+    console.log("")
+    console.log("Producto no encontrado!");
+    return
+  }
+  const newProducts = products.filter((p) => p.id !== productId);
+  saveJSONToFile("./src/products.json", newProducts);
+  console.log("")
+  console.log(`Producto eliminado exitosamente! ID: ${productId}`)
+}
+
+export { deleteProduct, addProduct, __dirname, getJSONFromFile, saveJSONToFile };
