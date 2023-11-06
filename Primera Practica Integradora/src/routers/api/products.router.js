@@ -1,5 +1,6 @@
 import { Router } from "express";
 import ProductManager from "../../dao/ProductManager.js";
+import { uploader } from "../../utils.js";
 
 const router = Router();
 
@@ -11,56 +12,51 @@ router.get("/products", async (req, res) => {
   res.status(200).json(products);
 });
 
-/*
-
-const URL_BASE = 'http://localhost:8080/avatars';
-
-router.get('/students', async (req, res) => {
-  const { query = {} } = req;
-  const students = await StudentManager.get(query);
-  res.status(200).json(students);
-});
-
-router.get('/students/:sid', async (req, res) => {
+router.get("/products/:pid", async (req, res) => {
   try {
-    const { params: { sid } } = req;
-    const student = await StudentManager.getById(sid);
-    res.status(200).json(student);
+    const {
+      params: { pid },
+    } = req;
+    const product = await ProductManager.getById(pid);
+    res.status(200).json(product);
   } catch (error) {
     res.status(error.statusCode || 500).json({ message: error.message });
   }
 });
 
-router.post('/students', uploader.single('avatar'), async (req, res) => {
+router.post("/products", uploader.single("thumbnail"), async (req, res) => {
   const { body, file } = req;
-  const newStudent = { ...body };
+  const newProduct = { ...body };
   if (file) {
-    newStudent.avatar = `${URL_BASE}/${file.filename}`;
+    newProduct.thumbnail = `${URL_BASE}/${file.filename}`;
   }
-  const student = await StudentManager.create(newStudent);
-  res.status(201).json(student);
+  const product = await ProductManager.create(newProduct);
+  res.status(201).json(product);
 });
 
-router.put('/students/:sid', async (req, res) => {
+router.put("/products/:pid", async (req, res) => {
   try {
-    const { params: { sid }, body } = req;
-    await StudentManager.updateById(sid, body);
+    const {
+      params: { pid },
+      body,
+    } = req;
+    await ProductManager.updateById(pid, body);
     res.status(204).end();
   } catch (error) {
     res.status(error.statusCode || 500).json({ message: error.message });
   }
 });
 
-router.delete('/students/:sid', async (req, res) => {
+router.delete("/products/:pid", async (req, res) => {
   try {
-    const { params: { sid } } = req;
-    await StudentManager.deleteById(sid);
+    const {
+      params: { pid },
+    } = req;
+    await ProductManager.deleteById(pid);
     res.status(204).end();
   } catch (error) {
     res.status(error.statusCode || 500).json({ message: error.message });
   }
 });
-
-*/
 
 export default router;

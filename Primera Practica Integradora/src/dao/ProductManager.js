@@ -1,4 +1,4 @@
-import ProductModel from "../models/product.model.js";
+import ProductModel from "./models/product.model.js";
 import { Exception } from "../utils.js";
 
 export default class ProductManager {
@@ -7,7 +7,7 @@ export default class ProductManager {
     if (query.course) {
       criteria.course = query.course;
     }
-    return ProductModel.find(criteria);
+    return ProductModel.find(criteria).lean();
   }
 
   static async getById(pid) {

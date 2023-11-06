@@ -4,8 +4,10 @@ import path from "path";
 
 import homeRouter from "./routers/home.router.js";
 import productsApiRouter from "./routers/api/products.router.js";
-import productsViewRouter from "./routers/views/product.router.js";
-import RTPRouter from "./routers/realtimeproducts.router.js";
+import productsViewRouter from "./routers/views/products.router.js";
+
+import messagesApiRouter from "./routers/api/messages.router.js";
+import messagesViewRouter from "./routers/views/messages.router.js";
 
 import { __dirname } from "./utils.js";
 
@@ -17,11 +19,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
 
-//app.use('/api', productsRouter, cartsRouter);
-/* app.use("/", homeRouter); */
-app.use("/", productsViewRouter);
+app.use("/", homeRouter, messagesViewRouter, productsViewRouter);
+app.use("/api", messagesApiRouter);
 app.use("/api", productsApiRouter);
-app.use("/realtimeproducts", RTPRouter);
 
 app.engine("handlebars", handlebars.engine());
 app.set("views", path.join(__dirname, "views"));

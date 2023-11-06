@@ -1,3 +1,0 @@
-/*
-Hacer el esquema del carrito de compras
-*/
