@@ -44,4 +44,13 @@ export default class ProductManager {
     await ProductModel.deleteOne(criteria);
     console.log("Producto eliminado correctamente 😑");
   }
+
+  static async productExists(pid) {
+    console.log(await ProductModel.findOne({ _id: pid }));
+    try {
+      return await ProductModel.findOne({ _id: pid });
+    } catch (error) {
+      return false;
+    }
+  }
 }

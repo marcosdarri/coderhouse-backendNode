@@ -1,25 +1,16 @@
 import mongoose from "mongoose";
-import mongoosePaginate from "mongoose-paginate-v2";
 
-const productSchema = new mongoose.Schema(
-  {
-    product: { type: mongoose.Schema.Types.ObjectId, ref: "products" },
-  },
-  { _id: false }
-);
-
-const cartSchema = new mongoose.Schema(
-  {
-    cid: { type: String, required: true, unique: true },
-    products: { type: [productSchema], default: [] },
-  },
-  { timestamps: true }
-);
-
-cartSchema.pre("getById", function () {
-  this.populate("products.product");
+const cartSchema = new mongoose.Schema({
+  products: [
+    {
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "product",
+        required: true,
+      },
+      quantity: { type: Number, default: 1, required: true },
+    },
+  ],
 });
-
-cartSchema.plugin(mongoosePaginate);
 
 export default mongoose.model("carts", cartSchema);

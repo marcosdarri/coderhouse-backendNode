@@ -17,7 +17,8 @@ app.engine("handlebars", handlebars.engine());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
-app.use("/", homerouter, productsRouter, cartsRouter);
+app.use("/", homerouter, productsRouter);
+app.use("/carts", cartsRouter);
 
 app.use((error, req, res, next) => {
   const message = `Ah ocurrido un error desconocido 😨: ${error.message}`;
