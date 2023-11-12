@@ -5,6 +5,8 @@ import homerouter from "./routers/homeRouter.js";
 import productsRouter from "./routers/products.router.js";
 import cartsRouter from "./routers/carts.router.js";
 import { __dirname } from "./utils.js";
+import productsApiRouter from "./routers/api/products.router.js";
+import cartsApiRouter from "./routers/api/carts.router.js";
 import cartModel from "./dao/models/cart.model.js";
 
 const app = express();
@@ -12,6 +14,9 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
+
+app.use("/api/products", productsApiRouter);
+app.use("/api/carts", cartsApiRouter);
 
 app.engine("handlebars", handlebars.engine());
 app.set("views", path.join(__dirname, "views"));

@@ -2,12 +2,14 @@ import ProductModel from "./models/product.model.js";
 import { Exception } from "../utils.js";
 
 export default class ProductManager {
-  static get(query = {}) {
-    const criteria = {};
-    if (query.course) {
-      criteria.course = query.course;
+  static async get() {
+    try {
+      // Obtener todos los productos desde la base de datos
+      const products = await ProductModel.find({});
+      return products;
+    } catch (error) {
+      res.status(500).json({ error: "Error al obtener los productos" });
     }
-    return ProductModel.find(criteria).lean();
   }
 
   static async getById(pid) {
@@ -15,12 +17,6 @@ export default class ProductManager {
     if (!product) {
       throw new Exception("No existe el producto 😨", 404);
     }
-    return product;
-  }
-
-  static async create(data) {
-    const product = await ProductModel.create(data);
-    console.log("Producto creado correctamente 😁");
     return product;
   }
 
@@ -51,6 +47,22 @@ export default class ProductManager {
       return await ProductModel.findOne({ _id: pid });
     } catch (error) {
       return false;
+    }
+  }
+
+  static async addProduct(productData) {
+    try {
+      productData.category = productData.category.toLowerCase();
+
+      await ProductModel.create(productData);
+    } catch (error) {
+      if (error.code === 11000) {
+        throw new Exception(
+          `Product with code "${productData.code}" already exists. code must be unique`,
+          409
+        );
+      }
+      throw new Exception("Product data is not valid", 400);
     }
   }
 }
