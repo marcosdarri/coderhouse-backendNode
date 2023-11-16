@@ -7,23 +7,44 @@ import cartsRouter from "./routers/carts.router.js";
 import { __dirname } from "./utils.js";
 import productsApiRouter from "./routers/api/products.router.js";
 import cartsApiRouter from "./routers/api/carts.router.js";
-import cartModel from "./dao/models/cart.model.js";
+import sessionApiRouter from "./routers/api/sessions.router.js";
+
+import expressSession from "express-session";
+import MongoStore from "connect-mongo";
+import { URI } from "./db/mongodb.js";
 
 const app = express();
+
+const SESSION_SECRET = "qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@";
+
+app.use(
+  expressSession({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: URI,
+      mongoOptions: {},
+      ttl: 3600,
+    }),
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.use("/api/products", productsApiRouter);
-app.use("/api/carts", cartsApiRouter);
-
 app.engine("handlebars", handlebars.engine());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
-app.use("/", homerouter, productsRouter);
+app.use("/", homerouter);
+app.use("/products", productsRouter);
 app.use("/carts", cartsRouter);
+
+app.use("/api/products", productsApiRouter);
+app.use("/api/carts", cartsApiRouter);
+app.use("/api", sessionApiRouter);
 
 app.use((error, req, res, next) => {
   const message = `Ah ocurrido un error desconocido 😨: ${error.message}`;

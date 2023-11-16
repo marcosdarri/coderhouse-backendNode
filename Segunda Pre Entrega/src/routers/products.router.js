@@ -15,10 +15,12 @@ router.get("/products", async (req, res) => {
   }
 
   const result = await productModel.paginate(criteria, opts);
+  console.log("result", result);
   if (sort) {
     if (sort === "asc") ordenAscendente(result.docs);
     if (sort === "desc") ordenDescendente(result.docs);
   }
+
   res.render("products", buildResponse({ ...result, category, stock }));
 });
 

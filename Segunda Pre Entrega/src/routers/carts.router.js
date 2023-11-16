@@ -5,6 +5,7 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const carts = await CartManager.get();
+  console.log("carts", carts);
   res.render("carts", { carts });
 });
 
