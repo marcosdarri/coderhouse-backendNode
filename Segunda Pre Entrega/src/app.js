@@ -1,6 +1,7 @@
 import express from "express";
 import handlebars from "express-handlebars";
 import path from "path";
+import passport from "passport";
 import homerouter from "./routers/homeRouter.js";
 import productsRouter from "./routers/products.router.js";
 import cartsRouter from "./routers/carts.router.js";
@@ -8,7 +9,7 @@ import { __dirname } from "./utils.js";
 import productsApiRouter from "./routers/api/products.router.js";
 import cartsApiRouter from "./routers/api/carts.router.js";
 import sessionApiRouter from "./routers/api/sessions.router.js";
-
+import { init as initPassportConfig } from "./config/passport.config.js";
 import expressSession from "express-session";
 import MongoStore from "connect-mongo";
 import { URI } from "./db/mongodb.js";
@@ -33,6 +34,11 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
+
+initPassportConfig();
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.engine("handlebars", handlebars.engine());
 app.set("views", path.join(__dirname, "views"));

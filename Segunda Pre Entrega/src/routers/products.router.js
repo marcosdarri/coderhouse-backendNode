@@ -3,7 +3,7 @@ import productModel from "../dao/models/product.model.js";
 
 const router = Router();
 
-router.get("/products", async (req, res) => {
+router.get("/", async (req, res) => {
   const { page = 1, limit = 10, category, stock, sort } = req.query;
   const opts = { page, limit };
   const criteria = {};
@@ -15,13 +15,21 @@ router.get("/products", async (req, res) => {
   }
 
   const result = await productModel.paginate(criteria, opts);
-  console.log("result", result);
   if (sort) {
     if (sort === "asc") ordenAscendente(result.docs);
     if (sort === "desc") ordenDescendente(result.docs);
   }
-
-  res.render("products", buildResponse({ ...result, category, stock }));
+  console.log(
+    `Bienvenido ${req.session.user.first_name} ${req.session.user.last_name}!`
+  );
+  res.render(
+    "products",
+    buildResponse({
+      ...result,
+      userName: req.session.user.first_name,
+      userLastName: req.session.user.last_name,
+    })
+  );
 });
 
 const buildResponse = (data) => {

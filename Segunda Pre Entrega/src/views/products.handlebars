@@ -1,8 +1,7 @@
 
 <header style="display:flex;justify-content:end;">
     <a href="/api/sessions/logout" role="button">Logout</a>
-  </header>
-  <p class="welcome">Bienvenido: {{user.first_name}} {{user.last_name}}!</p>
+</header>
 <h1>Productos</h1>
 <table id="main">
   <tr>
@@ -28,32 +27,6 @@
     </tr>
   {{/each}}
 </table>
-
-<style>
-  .welcome {
-    background-color: green;
-    border-radius: 20px;
-    padding: 10px;
-    text-align: center;
-    width: 350px;
-  }
-  .invisible{
-    display: none;
-  }
-</style>
-  <script>
-    // Selecciona la sección por su clase
-    var miSeccion = document.getElementsByClassName('welcome')[0]; 
-
-    // Función para agregar la clase 'invisible' después de 3 segundos
-    function ocultarSeccion() {
-      miSeccion.classList.add('invisible');
-    }
-
-    // Ejecuta la función después de 5 segundos
-    setTimeout(ocultarSeccion, 3000);
-  </script>
-
 
 <p>Pagina actual: {{page}}</p>
 <a href="{{prevLink}}" role="button" {{#unless hasPrevPage}} disabled {{/unless}}>Anterior</a>

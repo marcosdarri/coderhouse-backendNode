@@ -25,20 +25,16 @@ router.get("/", (req, res) => {
   }
 });
 
-router.get("/products", privateRouter, (req, res) => {
-  try {
-    res.render("products", { title: "Products", user: req.session.user });
-  } catch (error) {
-    throw new Exception("User information was not found");
-  }
-});
-
 router.get("/login", publicRouters, (req, res) => {
   res.render("login", { title: "Login" });
 });
 
 router.get("/register", publicRouters, (req, res) => {
   res.render("register", { title: "Register" });
+});
+
+router.get("/recovery-password", publicRouters, (req, res) => {
+  res.render("recovery-password", { title: "Recuperar contraseña 😁" });
 });
 
 export default router;

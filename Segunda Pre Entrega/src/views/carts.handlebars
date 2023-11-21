@@ -5,18 +5,18 @@
     <th><b>Product Id</b></th>
     <th><b>Quantity</b></th>
   </tr>
-  {{#each carts}}
-    <tr>
-      <td>{{this.cid}}</td>
-      <td></td>
-      <td></td>
-    </tr>
-    {{#each this.products}}
+  <tr>
+    <td>{{cartId}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  {{#if products}}
+    {{#each products}}
       <tr>
         <td></td>
-        <td>{{pid}}</td>
-        <td>{{quantity}}</td>
+        <td>{{this.pid}}</td>
+        <td>{{this.quantity}}</td>
       </tr>
     {{/each}}
-  {{/each}}
+  {{/if}}
 </table>

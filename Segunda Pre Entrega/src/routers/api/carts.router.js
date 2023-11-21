@@ -13,7 +13,6 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const cart = await CartManager.get();
-
     res.status(201).json(cart);
   } catch (error) {
     res.status(error.statusCode || 500).send(error.message);
