@@ -63,5 +63,4 @@ export default app;
 //Products
 //http://localhost:8080/products?limit=4&page=1&category=Ropa
 //Carts
-//http://localhost:8080/carts/654d5722dc08fa0b96f62bd9
-//http://localhost:8080/products?limit=4&page=1&category=Ropa&stock=999
+//http://localhost:8080/carts/654d98a9dc08fa0b96f62be6
