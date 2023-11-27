@@ -1,4 +1,5 @@
 
+ 
 <header style="display:flex;justify-content:end;">
     <a href="/api/sessions/logout" role="button">Logout</a>
 </header>
@@ -23,7 +24,7 @@
       <td>{{this.status}}</td>
       <td>{{this.stock}}</td>
       <td>{{this.category}}</td>
-      <td><button id="button">Agregar</button></td>
+      <td><button>Agregar</button></td>
     </tr>
   {{/each}}
 </table>
@@ -31,3 +32,5 @@
 <p>Pagina actual: {{page}}</p>
 <a href="{{prevLink}}" role="button" {{#unless hasPrevPage}} disabled {{/unless}}>Anterior</a>
 <a href="{{nextLink}}" role="button" {{#unless hasNextPage}} disabled {{/unless}}>Siguiente</a>
+
+
