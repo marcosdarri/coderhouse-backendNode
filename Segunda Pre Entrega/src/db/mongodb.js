@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
-export const URI =
-  "mongodb+srv://marcosdarri:md11596303@cluster0.jqjclxu.mongodb.net/ecommerce";
+export const URI = process.env.ECOMMERCE_URL;
 
 export const init = async () => {
   try {
