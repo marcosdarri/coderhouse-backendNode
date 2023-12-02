@@ -7,8 +7,20 @@ const router = Router();
 
 router.post(
   "/sessions/register",
+  (req, res, next) => {
+    // Middleware para modificar el rol antes de la autenticación
+    if (
+      req.body.password === "adminCod3r123" &&
+      req.body.email === "adminCoder@coder.com"
+    ) {
+      req.body.role = "admin";
+    }
+    // Llama al siguiente middleware (en este caso, passport.authenticate)
+    next();
+  },
   passport.authenticate("register", { failureRedirect: "/register" }),
   (req, res) => {
+    // Este bloque de código se ejecutará después de la autenticación
     res.redirect("/login");
   }
 );
