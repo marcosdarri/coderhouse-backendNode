@@ -13,11 +13,14 @@ import { init as initPassportConfig } from "./config/passport.config.js";
 import expressSession from "express-session";
 import MongoStore from "connect-mongo";
 import { URI } from "./db/mongodb.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 const SESSION_SECRET = "qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@";
+const COOKIE_SECRET = "qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@";
 
+app.use(cookieParser(COOKIE_SECRET));
 app.use(
   expressSession({
     secret: SESSION_SECRET,

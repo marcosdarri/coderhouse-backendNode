@@ -1,26 +1,55 @@
 import { Router } from "express";
 import UserModel from "../../dao/models/user.model.js";
 import passport from "passport";
-import { createHash } from "../../utils.js";
+import { createHash, tokenGenerator, isValidPassword } from "../../utils.js";
 
 const router = Router();
 
 router.post(
   "/sessions/register",
+  async (req, res, next) => {
+    // Middleware para modificar el rol antes de la autenticación
+    if (
+      req.body.password === "adminCod3r123" &&
+      req.body.email === "adminCoder@coder.com"
+    ) {
+      req.body.role = "admin";
+    }
+    // Llama al siguiente middleware (en este caso, passport.authenticate)
+    next();
+  },
   passport.authenticate("register", { failureRedirect: "/register" }),
   (req, res) => {
+    // Este bloque de código se ejecutará después de la autenticación
     res.redirect("/login");
   }
 );
 
-router.post(
-  "/sessions/login",
-  passport.authenticate("login", { failureRedirect: "/login" }),
-  (req, res) => {
-    req.session.user = req.user;
-    res.redirect("/products");
+router.post("/sessions/login", async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(401).json({ message: "Correo o contraseña invaldos 😨" });
   }
-);
+  const user = await UserModel.findOne({ email });
+  if (!user) {
+    return res.status(401).json({ message: "Correo o contraseña invaldos 😨" });
+  }
+  const validPassword = isValidPassword(password, user);
+  if (!validPassword) {
+    return res.status(401).json({ message: "Correo o contraseña invaldos 😨" });
+  }
+  const token = tokenGenerator(user);
+  res
+    .cookie("access_token", token, {
+      maxAge: 1000 * 60 * 30,
+      httpOnly: true,
+      signed: true,
+    })
+    .status(200);
+
+  req.session.user = user;
+  res.redirect("/products");
+});
 
 router.get("/sessions/logout", (req, res) => {
   req.session.destroy((error) => {

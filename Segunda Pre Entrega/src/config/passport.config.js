@@ -3,8 +3,10 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { createHash, isValidPassword } from "../utils.js";
 import { Strategy as GithubStrategy } from "passport-github2";
 import UserModel from "../dao/models/user.model.js";
+import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
+import { JWT_SECRET } from "../utils.js";
 
-const opts = {
+const localOpts = {
   usernameField: "email",
   passReqToCallback: true,
 };
@@ -15,10 +17,35 @@ const githubOpts = {
   callbackURL: "http://localhost:8080/api/sessions/github/callback", // Este dato debe ser pasado por parametro
 };
 
+function coookieExtractor(req) {
+  let token = null;
+  if (req && req.signedCookies) {
+    token = req.signedCookies["access_token"];
+  }
+  return token;
+}
+
+const opts = {
+  jwtFromRequest: ExtractJwt.fromExtractors([coookieExtractor]),
+  secretOrKey: JWT_SECRET,
+};
+
 export const init = () => {
   passport.use(
+    "jwt",
+    new JwtStrategy(opts, (payload, done) => {
+      return done(null, payload);
+    })
+  );
+  passport.use(
+    "current",
+    new JwtStrategy(opts, (payload, done) => {
+      return done(null, payload);
+    })
+  );
+  passport.use(
     "register",
-    new LocalStrategy(opts, async (req, email, password, done) => {
+    new LocalStrategy(localOpts, async (req, email, password, done) => {
       try {
         const user = await UserModel.findOne({ email });
         if (user) {
@@ -41,7 +68,7 @@ export const init = () => {
 
   passport.use(
     "login",
-    new LocalStrategy(opts, async (req, email, password, done) => {
+    new LocalStrategy(localOpts, async (req, email, password, done) => {
       try {
         const user = await UserModel.findOne({ email });
         if (!user) {

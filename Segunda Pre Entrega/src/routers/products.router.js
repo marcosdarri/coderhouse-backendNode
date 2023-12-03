@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
     if (sort === "desc") ordenDescendente(result.docs);
   }
   console.log(
-    `Bienvenido ${req.session.user.first_name} ${req.session.user.last_name} email: ${req.session.user.last_name}!`
+    `Bienvenido ${req.session.user.first_name} ${req.session.user.last_name} email: ${req.session.user.email}!`
   );
   res.render(
     "products",
