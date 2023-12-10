@@ -34,10 +34,10 @@ export default class CartDao {
   static async getById(cid, populate = false) {
     try {
       const cart = await CartModel.findOne({ _id: cid });
+      console.log("populate", populate);
       if (populate) {
         return await cart.populate("products.product");
       }
-
       return cart;
     } catch (error) {
       throw new Exception(`Cart with id "${cid}" not found`, 404);
