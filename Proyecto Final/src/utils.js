@@ -2,6 +2,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import JWT from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -33,7 +35,7 @@ export const isValidPassword = (password, user) =>
 
 export const __dirname = path.dirname(__filename);
 
-export const JWT_SECRET = "qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@";
+export const JWT_SECRET = process.env.JWT_SECRET;
 
 export const tokenGenerator = (user) => {
   const { _id: id, first_name, last_name, email, role } = user;

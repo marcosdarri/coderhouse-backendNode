@@ -14,11 +14,13 @@ import expressSession from "express-session";
 import MongoStore from "connect-mongo";
 import { URI } from "./db/mongodb.js";
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
-const SESSION_SECRET = "qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@";
-const COOKIE_SECRET = "qBvPkU2X;J1,51Z!~2p[JW.DT|g:4l@";
+const SESSION_SECRET = process.env.SESSION_SECRET;
+const COOKIE_SECRET = process.env.COOKIE_SECRET;
 
 app.use(cookieParser(COOKIE_SECRET));
 app.use(
@@ -61,9 +63,3 @@ app.use((error, req, res, next) => {
 });
 
 export default app;
-
-//Probar con este ejemplo:
-//Products
-//http://localhost:8080/products?limit=4&page=1&category=Ropa
-//Carts
-//http://localhost:8080/carts/654d98a9dc08fa0b96f62be6

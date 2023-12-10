@@ -2,6 +2,8 @@ import { Router } from "express";
 import UsersController from "../../controllers/users.controller.js";
 import passport from "passport";
 import { createHash, tokenGenerator, isValidPassword } from "../../utils.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = Router();
 
@@ -10,8 +12,8 @@ router.post(
   async (req, res, next) => {
     // Middleware para modificar el rol antes de la autenticación
     if (
-      req.body.password === "adminCod3r123" &&
-      req.body.email === "adminCoder@coder.com"
+      req.body.password === process.env.ADMIN_EMAIL &&
+      req.body.email === process.env.ADMIN_PWD
     ) {
       req.body.role = "admin";
     }

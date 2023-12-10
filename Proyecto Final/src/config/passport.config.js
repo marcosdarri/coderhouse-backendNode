@@ -5,6 +5,8 @@ import { Strategy as GithubStrategy } from "passport-github2";
 import UsersController from "../controllers/users.controller.js";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { JWT_SECRET } from "../utils.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const localOpts = {
   usernameField: "email",
@@ -12,9 +14,9 @@ const localOpts = {
 };
 
 const githubOpts = {
-  clientID: "Iv1.3ed7e564645fa70d", // Este dato debe ser pasado por parametro
-  clientSecret: "2ab2fe9b042472fd35d15139fcc1562c36b4dd4f", // Este dato debe ser pasado por parametro
-  callbackURL: "http://localhost:8080/api/sessions/github/callback", // Este dato debe ser pasado por parametro
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURL: process.env.CALLBACK_URL,
 };
 
 function coookieExtractor(req) {
