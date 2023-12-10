@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { Exception } from "../utils.js";
 
 const router = Router();
 
