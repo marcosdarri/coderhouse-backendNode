@@ -1,0 +1,7 @@
+.th {
+  text-align: left;
+}
+
+.button:hover {
+  cursor: pointer;
+}
